@@ -1,0 +1,17 @@
+﻿@using MyAngle.Mvc.Features.Dictionary.Dictionary;
+@using MyAngle.Mvc.Features.Dictionary.Search;
+@model  DictionaryIndexViewModel
+
+<div>
+    <h2>Dictionary</h2>
+
+    <hr />
+    <p>Search Word: </p>
+    <partial name="../Search/SearchFormPartial.cshtml"
+         model="new SearchFormPartialViewModel(){SearchQuery=Model.SearchQuery}"
+    />
+
+    <hr />
+    <h3>Featured Word: @Model.FeaturedWord.Name (@Model.FeaturedWord.Phonetic)</h3>
+
+</div>

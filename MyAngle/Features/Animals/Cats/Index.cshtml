@@ -1,0 +1,18 @@
+﻿@using MyAngle.Mvc.Features.Animals.Cats;
+@model CatsIndexViewModel
+<h2>Cats</h2>
+<div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Animals" asp-action="Index">Animals</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cats</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+<p>Take a look at our beautiful cats!</p>
+
+<h2>Featured Cat</h2>
+<div>
+    <img src="@Model.FeaturedCat.ImageUrl" alt="@Model.FeaturedCat.Name" style="width:50vw" />
+</div>

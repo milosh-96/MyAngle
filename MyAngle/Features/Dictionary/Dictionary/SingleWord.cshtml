@@ -1,0 +1,26 @@
+﻿@using MyAngle.Mvc.Features.Dictionary.Dictionary;
+@using MyAngle.Mvc.Features.Dictionary.Search;
+@model SingleWordViewModel
+
+<div>
+    <partial name="../Search/SearchFormPartial.cshtml"
+             model="new SearchFormPartialViewModel(){SearchQuery=Model.Word.Name}" />
+    <hr />
+    <h2>@Model.Word (@Model.Word.Phonetic)</h2>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <h3>Meanings</h3>
+            <ul class="list-group">
+                @foreach(var item in Model.Definitions)
+                {
+                    <li class="list-group-item">
+                        <p>@item.Definition</p>
+                        <small>@item.Example</small>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
