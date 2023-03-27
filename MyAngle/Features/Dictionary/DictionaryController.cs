@@ -44,6 +44,7 @@ namespace MyAngle.Mvc.Features.Dictionary
             {
                     viewModel.Phonetics.AddRange(item.Phonetics.Where(x=> !String.IsNullOrEmpty(x.Audio)));
             }
+            ViewData["Title"] = "Word: " + item.Name;
             return View(viewModel);
         } 
     }
