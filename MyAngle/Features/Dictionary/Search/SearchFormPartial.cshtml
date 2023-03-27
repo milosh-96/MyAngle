@@ -4,7 +4,7 @@
 <form asp-route="DictionarySearch" method="get">
     <div class="row">
         <div class="col-10">
-            <input type="text" asp-for="SearchQuery" class="form-control" />
+            <input type="text" autocomplete="off" asp-for="SearchQuery" class="form-control" />
         </div>
         <div class="col-2">
             <button type="submit" class="btn btn-primary" style="width:100%">Search</button>

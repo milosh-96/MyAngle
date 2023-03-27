@@ -1,9 +1,9 @@
+using Microsoft.AspNetCore.Hosting;
 using MyAngle.Mvc.Conventions;
 using MyAngle.Mvc.Core.Extensions;
 using MyAngle.Mvc.Entities;
 using MyAngle.Mvc.Features.Animals.Dogs;
 using MyAngle.Mvc.Features.Dictionary.Dictionary;
-using MyAngle.Mvc.Infrastructure;
 
 namespace MyAngle.Mvc
 {
@@ -12,6 +12,8 @@ namespace MyAngle.Mvc
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            //add mediatr//
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
             // Add services to the container.
             builder.Services.AddMvc(o => o.Conventions.Add(new FeatureConvention()))
@@ -23,8 +25,6 @@ namespace MyAngle.Mvc
             // builder.Services.AddControllersWithViews();
 
             //services//
-            builder.Services.AddScoped<IApiRequestService<Dog>, DogService>();
-            builder.Services.AddScoped<IDictionaryService, DictionaryService>();
 
             var app = builder.Build();
 

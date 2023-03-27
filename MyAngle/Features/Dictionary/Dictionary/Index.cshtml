@@ -12,6 +12,8 @@
     />
 
     <hr />
-    <h3>Featured Word: @Model.FeaturedWord.Name (@Model.FeaturedWord.Phonetic)</h3>
+    <h3>Featured Word: <a asp-action="SingleWord" asp-route-word="@Model.FeaturedWord.Name">
+            @Model.FeaturedWord.Name</a> (@Model.FeaturedWord.Phonetic)
+    </h3>
 
 </div>

@@ -1,6 +1,8 @@
-﻿namespace MyAngle.Mvc.Features.Dictionary.Dictionary
+﻿using MyAngle.Mvc.Entities;
+
+namespace MyAngle.Mvc.Features.Dictionary.Dictionary
 {
-    public class WordMeaning
+    public class WordMeaning : BaseEntity
     {
         public List<WordDefinition> Definitions { get; set; } = new List<WordDefinition>();
     }

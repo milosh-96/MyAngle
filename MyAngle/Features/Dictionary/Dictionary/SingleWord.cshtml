@@ -21,6 +21,19 @@
                 }
             </ul>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <h3>Phonetics</h3>
+            <ul class="list-group">
+                @foreach (var item in Model.Phonetics)
+                {
+                    <li class="list-group-item">
+                        <p>@Model.Word.Phonetic</p>
+                        <audio controls>
+                            <source src="@item.Audio" type="audio/mp3"> 
+                        </audio>
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using MyAngle.Mvc.Entities;
 using MyAngle.Mvc.Features.Dictionary.Dictionary;
 
@@ -6,11 +7,11 @@ namespace MyAngle.Mvc.Features.Dictionary
 {
     public class DictionaryController : Controller
     {
-        private readonly IDictionaryService _dictionaryService;
+        private readonly IMediator _mediator;
 
-        public DictionaryController(IDictionaryService dictionaryService)
+        public DictionaryController(IMediator mediator)
         {
-            _dictionaryService = dictionaryService;
+            _mediator = mediator;
         }
 
         [HttpGet(Name="DictionaryHome")]
@@ -19,7 +20,7 @@ namespace MyAngle.Mvc.Features.Dictionary
         {
             ViewData["Title"] = "Dictionary: Words and Definitions - Index";
             DictionaryIndexViewModel viewModel = new DictionaryIndexViewModel();
-            Word? word = await _dictionaryService.Get("World");
+            Word? word = (await _mediator.Send(new GetWordRequest("Apple")));
             if (word != null) { viewModel.FeaturedWord = word; }
             return View(viewModel);
         }
@@ -28,7 +29,7 @@ namespace MyAngle.Mvc.Features.Dictionary
         public async Task<IActionResult> SingleWord([FromQuery] string word)
         {
             Word? item = null;
-            item = await _dictionaryService.Get(word);
+            item = (await _mediator.Send(new GetWordRequest(word)));
             if(item == null) { return new NotFoundResult(); }
             SingleWordViewModel viewModel = new SingleWordViewModel() { Word = item };
             if (item.Meanings.Any())
@@ -38,6 +39,10 @@ namespace MyAngle.Mvc.Features.Dictionary
                 {
                     viewModel.Definitions.AddRange(meaning.Definitions);
                 }
+            }
+            if (item.Phonetics.Any())
+            {
+                    viewModel.Phonetics.AddRange(item.Phonetics.Where(x=> !String.IsNullOrEmpty(x.Audio)));
             }
             return View(viewModel);
         } 
